@@ -11,10 +11,23 @@ let median (crabs: Crabs) =
     |> Seq.sort
     |> Seq.item (len / 2 + len % 2)
     
+let avg (crabs: Crabs) =
+    let len = crabs |> Seq.length
+    let sum = crabs |> Seq.sum
+    sum / len
+    
+let progression (n: int) =
+    seq { for i in 1..n -> i }
+    |> Seq.sum
+
+let findCost pos crab =
+    let cost = crab - pos
+    if cost < 0 then progression -cost else progression cost
+
 let leastFuelCost (crabs: Crabs) =
-    let pos = median crabs
+    let pos = avg crabs
     crabs
-    |> Seq.map (fun crab -> let cost = crab - pos in if cost < 0 then -cost else cost)
+    |> Seq.map (findCost pos) 
     |> Seq.sum
     
 let test (crabs: Crabs) (estLeastCost: int) =
@@ -22,13 +35,12 @@ let test (crabs: Crabs) (estLeastCost: int) =
         crabs
         |> Seq.map (fun pos ->
             crabs
-            |> Seq.map (fun crab -> let cost = crab - pos in if cost < 0 then -cost else cost)
+            |> Seq.map (findCost pos)
             |> Seq.sum)
         |> Seq.sort
         |> Seq.head
     realLeastCost = estLeastCost
 
-// For more information see https://aka.ms/fsharp-console-apps
 let readInput () : Crabs =
     (File.ReadAllText "input")
         .Split(',')
