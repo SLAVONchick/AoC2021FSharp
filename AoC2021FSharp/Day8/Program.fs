@@ -140,33 +140,33 @@ type Display private() =
         
         display
         
-        member self.IsNumber (input: string) : int option =
-            match input.Length with
-            | 2 -> if stringEquals self.one input then Some 1 else None
-            | 3 -> if stringEquals self.seven input then Some 7 else None
-            | 4 -> if stringEquals self.four input then Some 4 else None
-            | 7 -> if stringEquals self.eight input then Some 8 else None
-            | 5 ->
-                if stringEquals self.two input then Some 2
-                elif stringEquals self.three input then Some 3
-                elif stringEquals self.five input then Some 5
-                else None
-            | 6 ->
-                if stringEquals self.zero input then Some 0
-                else if stringEquals self.six input then Some 6
-                else if stringEquals self.nine input then Some 9
-                else None
-            | _ -> None
+    member self.IsNumber (input: string) : int option =
+        match input.Length with
+        | 2 -> if stringEquals self.one input then Some 1 else None
+        | 3 -> if stringEquals self.seven input then Some 7 else None
+        | 4 -> if stringEquals self.four input then Some 4 else None
+        | 7 -> if stringEquals self.eight input then Some 8 else None
+        | 5 ->
+            if stringEquals self.two input then Some 2
+            elif stringEquals self.three input then Some 3
+            elif stringEquals self.five input then Some 5
+            else None
+        | 6 ->
+            if stringEquals self.zero input then Some 0
+            else if stringEquals self.six input then Some 6
+            else if stringEquals self.nine input then Some 9
+            else None
+        | _ -> None
             
-        override self.ToString() =
-            "     _____\n" +
-            $"    |  {self.first}  |\n" +
-            $"   {self.second}|     |{self.third}\n" +
-            "    |_____|\n" +
-            $"    |  {self.fourth}  |\n" +
-            $"   {self.fifth}|     |{self.sixth}\n" +
-            "    |_____|\n" +
-            $"       {self.seventh}   \n"
+    override self.ToString() =
+        "     _____\n" +
+        $"    |  {self.first}  |\n" +
+        $"   {self.second}|     |{self.third}\n" +
+        "    |_____|\n" +
+        $"    |  {self.fourth}  |\n" +
+        $"   {self.fifth}|     |{self.sixth}\n" +
+        "    |_____|\n" +
+        $"       {self.seventh}   \n"
             
 let countSimpleDigits (output: string seq) =
     output
